@@ -1,1 +1,3 @@
-# DBP_Final
+# Integrantes
+Sebastián López Peña
+Edgar Rodriguez Vilcapaza
