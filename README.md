@@ -1,3 +1,3 @@
 # Integrantes
-# Sebastián López Peña
-# Edgar Rodriguez Vilcapaza
+- Sebastián López Peña
+- Edgar Rodriguez Vilcapaza
