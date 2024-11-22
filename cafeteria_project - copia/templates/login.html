@@ -1,0 +1,95 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<header class="hero-login">
+
+    <div class="contenedor">
+
+        <div class="contenedor__hero">
+            <div class="contenedor-logo">
+                <img class="logo" src="./static/images/logo.svg" alt="logo">
+            </div>
+
+        </div>
+
+        <div class="text-contenedor">
+
+            <div class="text__hero">
+                <h1>"Mejores Granos, mejor Café"</h1>                    
+                
+            </div>
+
+        </div>
+        
+    </div>
+   
+</header>
+   <main class="container-login">
+       <h1 class="tr"><span>Reserva</span>Tu mesa</h1>
+       {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                <div class="container mt-3">
+                     {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+       <div class="login">
+        
+      
+           <div class="form">
+               <form action="/crear_usuario" method="POST" class="formulario">
+                   <div class="campo">
+                       <label for="nombre">Nombre:</label>
+                       <input type="text" id="nombre" name="nombre" placeholder="Tu Nombre" required>
+                    </div>
+                    <div class="campo">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Tu Email" required> 
+                    </div>
+                    <div class="campo">
+                        <label for="email">Número de Personas:</label>
+                        <select name="numero_de_personas" required>
+                            <option value="" disabled selected>-- Seleccione --</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                        </select>
+                    </div>
+                    
+                    <div class="campo">
+                        <label for="hora">Hora:</label>
+                        <input type="time" id="hora" name="hora"  required>
+                    </div>
+                    
+                    <div class="campo">
+                        <label for="fecha">Fecha:</label>
+                        <input type="date" name="fecha" id="fecha" required>
+                    </div>
+                    <div class="campo">
+                        <input type="submit" value="Enviar">
+                    </div>
+                </form>
+                <div>
+                    <img class="image" src="./static/images/granos_cafe.jpg" alt="img">
+                </div> 
+            </div>    
+            
+            
+            
+        </div>    
+        
+
+
+   </main>
+
+{% endblock %}

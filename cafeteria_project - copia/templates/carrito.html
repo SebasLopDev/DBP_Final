@@ -1,0 +1,52 @@
+<!-- carrito.html -->
+
+{% extends "base.html" %} 
+{% block content %}
+
+<div class="container mt-4 mb-4 h-75">
+  <h1>Carrito de Compras</h1>
+
+  <div id="carrito-details">
+    <!-- Los detalles del carrito se mostrarán aquí -->
+  </div>
+  <br>
+  <a href="/" class="btn btn-primary">Volver a la Lista</a>
+  <button class="btn btn-success" onclick="completarCompra()">Finalizar Compra</button>
+</div>
+
+<script>
+  function completarCompra() {
+    // Obtener los elementos en el carrito desde el almacenamiento local
+    var carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    // Verificar si hay elementos en el carrito
+    if (carrito.length > 0) {
+      // Enviar una solicitud al servidor para completar la compra
+      fetch('/completar_compra', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ carrito: JSON.parse(localStorage.getItem("carrito")) || [] })
+    })
+      .then(response => response.json())
+      .then(data => {
+        alert(data.mensaje);
+        
+        // Limpiar el carrito después de completar la compra
+        localStorage.removeItem("carrito");
+
+        // Redirigir a la página de inicio u otra página deseada
+        window.location.href = "/";
+      })
+      .catch(error => {
+        console.error('Error al completar la compra:', error);
+        alert('Error al completar la compra. Por favor, intenta nuevamente.');
+      });
+    } else {
+      alert("El carrito está vacío. Añade películas antes de completar la compra.");
+    }
+  }
+</script>
+
+{% endblock %}

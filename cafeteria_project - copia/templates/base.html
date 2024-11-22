@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}La Cafeteria{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Enlace al archivo CSS (estático) -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style2.css') }}" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="contenedor-nav">
+
+        <nav class="nav">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('menu') }}">Menú</a>
+            <a href="{{ url_for('galeria') }}">Galeria</a>
+            <a href="{{ url_for('product0s') }}">Productos</a>
+            <a href="{{ url_for('login') }}">Registrate</a>
+            <a href="{{ url_for('loginAdmin') }}">Administrador</a>
+            
+        </nav>
+    </div>
+    
+
+    <!-- Bloque de contenido que se reemplazará en cada página específica -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="contenedor-footer">
+            <div class="footer-ubicacion">
+                <h4>Ubicación</h4>                
+                <p>Avenida del Aroma 123,</p>
+                <p>Barrio Aromático</p>
+                <p>CP 45678</p>
+            </div>
+            <div class="footer-box reservacion">
+                <h4>Reservación</h4>
+                <p>Tel. 3850-9102</p>
+                <p>Llamar</p>
+            </div>
+            <div class="footer-box horario">
+                <h4>Horario</h4>
+                <p>Lun-Jue: 11:00 - 22:00</p>
+                <p>Vie-Sab: 09:00 - 24:00</p>
+                <p>Domingo: Cerrado</p>
+            </div>
+        </div>
+        <p class="copyright">Todos los derechos reservados. La Cafetería</p>
+    </footer>
+</body>
+</html>

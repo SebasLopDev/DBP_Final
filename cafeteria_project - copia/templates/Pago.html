@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Tu Pedido{% endblock %}
+
+{% block extra_css %} 
+<link href="{{ url_for('static', filename='css/style2.css') }}" rel="stylesheet"> 
+{% endblock %}
+
+{% block content %}
+<header class="hero-menu">
+    <div class="contenedor">
+        <div class="contenedor__hero">
+            <div class="contenedor-logo">
+                <img class="logo" src="./static/images/logo.svg" alt="logo">
+            </div>
+        </div>
+
+        <div class="text-contenedor">
+            <div class="text__hero">
+                <h1>Tu Pedido</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="nuestro-menu">
+    <div class="contenedor grid-menu">
+        <section class="menu pedido">
+            <h2>Detalles del Pedido</h2>           
+           
+
+            <!-- Mostrar los productos seleccionados -->
+            <ul>
+                {% for producto, cantidad in contadores.items() %}
+                    {% if cantidad > 0 %}
+                        <li class="producto-item">
+                            <div class="producto-info">
+                                {% if producto == 'cafeEmbolsado1' %}
+                                    <h4>St Helena</h4>
+                                {% elif producto == 'chirinos' %}
+                                    <h4>Chirino</h4>
+                                {% elif producto == 'conjunto' %}
+                                    <h4>Conjunto ViCofee</h4>
+                                {% elif producto == 'cusco' %}
+                                    <h4>Peruvian Coffee</h4>
+                                {% elif producto == 'perene' %}
+                                    <h4>Conjunto Perene</h4>
+                                {% elif producto == 'taza' %}
+                                    <h4>Taza Exotica</h4>
+                                {% elif producto == 'tazasvarias' %}
+                                    <h4>Colección Kopi Luwak</h4>
+                                {% endif %}
+                                <p><strong>Cantidad:</strong> {{ cantidad }}</p>
+                            </div>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+            <!-- Botones de acción -->
+            <div class="botones">
+                <form action="/Adquirido" method="POST">
+                    <input type="hidden" name="accion" id="accion" value="">
+                    <button class="boton confirmar" id="btnConfirmar" onclick="document.getElementById('accion').value = 'confirmar';">Confirmar</button>
+                    <button class="boton retornar" id="btnRetornar" onclick="document.getElementById('accion').value = 'retornar'; location.href='/productos';">Retornar</button>
+                </form>
+            </div>
+        </section>
+    </div>
+</section>
+{% endblock %}

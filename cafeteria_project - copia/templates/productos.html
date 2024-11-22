@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block title %}Productos{% endblock %}
+
+{% block extra_css %} 
+<link href="{{ url_for('static', filename='css/style2.css') }}" rel="stylesheet"> 
+{% endblock %}
+
+{% block content %}
+
+<header class="hero-galeria">
+    <div class="contenedor">
+        <div class="contenedor__hero">
+            <div class="contenedor-logo">
+                <img class="logo" src="./static/images/logo.svg" alt="logo">
+            </div>
+        </div>
+        <div class="text-contenedor">
+            <div class="text__hero">
+                <h1>Explora nuestros productos</h1>                    
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="contenedor2 contenido-principal">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <h2 class="galeria-h2"><span>Descubre nuestros</span> productos de primera categoria</h2>
+
+    <div class="galeria">
+    <!--PRIMERA FILA -->
+        <!-- Producto 1 -->
+        <div class="imagen">
+            <img src="/static/imagesproductos/cafeEmbolsado1.jpg" alt="Café Embolsado">
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="imagen">
+            <img src="/static/imagesproductos/chirinos.png" alt="Chirinos">
+        </div>
+        <!-- Producto 1 boton -->
+        <div class="control">
+            <p>Contador: <span id="valor_cafeEmbolsado1">0</span></p>
+            <button class="boton" id="cafeEmbolsado1_incremento">Incrementar</button>
+            <button class="boton" id="cafeEmbolsado1_decremento">Decrementar</button>
+        </div>
+        <!-- Producto 2 boton -->
+        <div class="control">
+            <p>Contador: <span id="valor_chirinos">0</span></p>
+            <button class="boton" id="chirinos_incremento">Incrementar</button>
+            <button class="boton" id="chirinos_decremento">Decrementar</button>
+        </div>
+
+    <!--TERCERA FILA -->
+        <!-- Producto 3 -->
+        <div class="imagen">
+            <img src="/static/imagesproductos/conjunto.jpg" alt="Conjunto">
+        </div>
+        <!-- Producto 4 -->
+        <div class="imagen">
+            <img src="/static/imagesproductos/cusco.png" alt="Cusco">
+        </div>
+        <!-- Producto 3 boton -->
+        <div class="control">
+            <p>Contador: <span id="valor_conjunto">0</span></p>
+            <button class="boton" id="conjunto_incremento">Incrementar</button>
+            <button class="boton" id="conjunto_decremento">Decrementar</button>
+        </div>
+        <!-- Producto 4 boton -->
+        <div class="control">
+            <p>Contador: <span id="valor_cusco">0</span></p>
+            <button class="boton" id="cusco_incremento">Incrementar</button>
+            <button class="boton" id="cusco_decremento">Decrementar</button>
+        </div>
+
+    <!--QUINTA FILA -->    
+        <!-- Producto 5 -->
+        <div class="imagen">
+            <img src="/static/imagesproductos/perene.png" alt="Perene">
+        </div>
+        <!-- Producto 6 -->
+        <div class="imagen">
+            <img src="/static/imagesproductos/taza.jpeg" alt="Taza">
+        </div>
+
+        <!-- Producto 5 boton -->
+        <div class="control">
+            <p>Contador: <span id="valor_perene">0</span></p>
+            <button class="boton" id="perene_incremento">Incrementar</button>
+            <button class="boton" id="perene_decremento">Decrementar</button>
+        </div>
+        <!-- Producto 6 boton -->
+        <div class="control">
+            <p>Contador: <span id="valor_taza">0</span></p>
+            <button class="boton" id="taza_incremento">Incrementar</button>
+            <button class="boton" id="taza_decremento">Decrementar</button>
+        </div>
+
+    <!--ULTIMA FILA -->  
+        <!-- Producto 7 -->
+        <div class="imagen">
+            <img src="/static/imagesproductos/tazasvarias.jpg" alt="Tazas Varias">
+        </div>
+
+        <div class="control">
+            <p>Contador: <span id="valor_tazasvarias">0</span></p>
+            <button class="boton" id="tazasvarias_incremento">Incrementar</button>
+            <button class="boton" id="tazasvarias_decremento">Decrementar</button>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="correo">Correo:</label>
+            <input type="email" id="correo" name="correo" required>
+
+        </div>
+        
+
+    </div>
+
+    <!-- Formulario para enviar los datos -->
+    <div class="control">
+        <form id="formulario_contadores" action="/confirmacionProducto" method="POST">
+            <!-- Campos ocultos para cada contador -->
+            <input type="hidden" name="cafeEmbolsado1" id="campo_cafeEmbolsado1">
+            <input type="hidden" name="chirinos" id="campo_chirinos">
+            <input type="hidden" name="conjunto" id="campo_conjunto">
+            <input type="hidden" name="cusco" id="campo_cusco">
+            <input type="hidden" name="perene" id="campo_perene">
+            <input type="hidden" name="taza" id="campo_taza">
+            <input type="hidden" name="tazasvarias" id="campo_tazasvarias">
+
+            <!-- Campos para nombre y correo -->
+            <input type="hidden" name="nombre" id="campo_nombre">
+            <input type="hidden" name="correo" id="campo_correo">
+            
+            <!-- Botón para enviar el formulario -->
+            <button class="boton" type="submit">Enviar Datos</button>
+        </form>
+    </div>
+
+</main>
+
+<script>
+    // Función para manejar los contadores
+    const contadores = {
+        cafeEmbolsado1: 0,
+        chirinos: 0,
+        conjunto: 0,
+        cusco: 0,
+        perene: 0,
+        taza: 0,
+        tazasvarias: 0
+    };
+
+    // Actualizar los contadores y campos ocultos al hacer clic en los botones
+    document.addEventListener('click', (e) => {
+        const id = e.target.id;
+        if (id.includes('_incremento')) {
+            const key = id.split('_')[0];
+            contadores[key]++;
+            document.getElementById(`valor_${key}`).textContent = contadores[key];
+            document.getElementById(`campo_${key}`).value = contadores[key]; // Actualizar campo oculto
+        } else if (id.includes('_decremento')) {
+            const key = id.split('_')[0];
+            if (contadores[key] > 0) {
+                contadores[key]--;
+                document.getElementById(`valor_${key}`).textContent = contadores[key];
+                document.getElementById(`campo_${key}`).value = contadores[key]; // Actualizar campo oculto
+            }
+        }
+    });
+
+    // Actualizar los valores de nombre y correo en los campos ocultos cuando cambien
+    document.getElementById('nombre').addEventListener('input', (e) => {
+        document.getElementById('campo_nombre').value = e.target.value;
+    });
+
+    document.getElementById('correo').addEventListener('input', (e) => {
+        document.getElementById('campo_correo').value = e.target.value;
+    });
+
+    // Inicializar los valores de los campos ocultos al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+        for (const key in contadores) {
+            document.getElementById(`campo_${key}`).value = contadores[key];
+        }
+    });
+</script>
+
+{% endblock %}
+
